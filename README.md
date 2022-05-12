@@ -6,3 +6,4 @@ A basic tic tack toe game with a history of plays made in the game. Every move i
 </br>
 </br>
 ![My Image](TicTac.png)
+![TicTac](https://user-images.githubusercontent.com/42485975/168109855-6b57ec30-8b5e-4825-901b-e68ef9ed6fe8.png)
