@@ -5,6 +5,13 @@ import './index.css';
 
 function App() {
   
+/**
+ * Square is a function that returns a button element with a className of square and an onClick event
+ * that calls the onClick function passed in as a prop.
+ * @param props - This is the object that contains all the properties that are passed to the component.
+ * @returns A button with a class of square and an onClick event that calls the onClick function in the
+ * props.
+ */
 function Square(props) {
   return (
     <button className="square" onClick={props.onClick}>
@@ -13,6 +20,7 @@ function Square(props) {
   );
 }
 
+/* Returning a Square component. */
 class Board extends React.Component {
   renderSquare(i) {
     return (
@@ -23,6 +31,10 @@ class Board extends React.Component {
     );
   }
 
+  /**
+   * It returns a div with three child divs, each of which contains three Square components.
+   * @returns The renderSquare function is being returned.
+   */
   render() {
     return (
       <div>
@@ -46,6 +58,7 @@ class Board extends React.Component {
   }
 }
 
+/* This is the constructor for the Game class. It is initializing the state of the Game class. */
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -58,6 +71,12 @@ class Game extends React.Component {
     };
   }
 
+  /**
+   * If the square is not empty or if there is a winner, return. Otherwise, set the square to X or O,
+   * depending on the value of xIsNext, and update the history and stepNumber states.
+   * @param i - The index of the square that was clicked.
+   * @returns the squares array with the value of the square that was clicked.
+   */
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
@@ -75,6 +94,11 @@ class Game extends React.Component {
     });
   }
 
+  /**
+   * The jumpTo() function takes a step as an argument and sets the state of the stepNumber and xIsNext
+   * to the step and the remainder of the step divided by 2, respectively.
+   * @param step - The step number we want to jump to.
+   */
   jumpTo(step) {
     this.setState({
       stepNumber: step,
@@ -82,6 +106,7 @@ class Game extends React.Component {
     });
   }
   
+  /* Rendering the game board. */
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -98,6 +123,8 @@ class Game extends React.Component {
       );
     });
 
+    /* Setting the status of the game. If there is a winner, it will display the winner. If there is no
+    winner, it will display the next player. */
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
@@ -124,11 +151,17 @@ class Game extends React.Component {
 
 // ========================================
 
+/* Rendering the Game component to the DOM. */
 ReactDOM.render(
   <Game />,
   document.getElementById('root')
 );
 
+/**
+ * If any of the winning combinations are true, return the winner (X or O).
+ * @param squares - an array of 9 squares
+ * @returns The winner of the game.
+ */
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
@@ -140,6 +173,8 @@ function calculateWinner(squares) {
     [0, 4, 8],
     [2, 4, 6],
   ];
+  /* Checking to see if any of the winning combinations are true. If they are, it will return the
+  winner (X or O). */
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
